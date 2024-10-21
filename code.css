@@ -1,0 +1,134 @@
+body {
+    font-family: "Optimistic Display Bold", "Segoe UI Historic", "Segoe UI", Helvetica, Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: aliceblue;
+}
+
+
+.container {
+    padding: 20px;
+    width: 70%;
+    max-width: 600px;
+    border-radius: 10px;
+    margin-top: 80px;
+}
+
+h1 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+p {
+    margin-bottom: 14px;
+    text-align: left;
+    width: 95%;
+    font-size: 17px;
+}
+
+b {
+    font-size: 15px;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+img {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+input[type="text"] {
+    width: 590px;
+    padding: 10px 0px 10px 10px;
+    margin: 10px 0;
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    font-size: 20px;
+    background-color: #1877f2;
+    color: aliceblue;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    cursor: pointer; 
+}
+
+button:hover {
+    border-color: #0c66c2;
+    background-color: #0c66c2; 
+}
+span {
+    width: 80%;
+}
+
+.footer {
+    margin-top: 20px;
+    color: #65676B;
+    font-size: 14px;
+}
+
+.footer span {
+    display: block;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 14px;
+        width: 100%;
+    }
+
+    b {
+        font-size: 14px;
+    }
+
+    img {
+        width: 100%;
+    }
+
+    input[type="text"], .button {
+        width: 100%;
+    }
+}
+
+/* Smaller devices */
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    p {
+        font-size: 13px;
+    }
+
+    b {
+        font-size: 13px;
+    }
+}

